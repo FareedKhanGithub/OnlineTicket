@@ -1,7 +1,7 @@
 #spring:
 #datasource:
-#username: fareed
-#password: pass
+#username:  
+#password: 
 #url: jdbc:mysql:///mydb?autoReconnect=true&serverTimezone=UTC
 #driver-class-name: com.mysql.jdbc.Driver
 #jpa:

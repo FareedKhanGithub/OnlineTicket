@@ -33,8 +33,8 @@ public class CustomerController {
 
 	private CustomerService customerService;
 	
-	private int whatid = 0;				//make both of these private
-	private boolean what = false;
+	private int storid = 0;				//make both of these private
+	private boolean storbool = false;
 	
 	@Autowired
 	public CustomerController(CustomerService theCustomerService) {					//customer Service needs to be implemented
@@ -49,7 +49,7 @@ public class CustomerController {
 		
 		
 							//list only one when entirely new user
-		Customer theCustomer = customerService.findById(whatid);
+		Customer theCustomer = customerService.findById(storid);
 		theModel.addAttribute("customers", theCustomer);
 		
 		return "Customer/list-customer";					//list-customer can show one or many 
@@ -58,18 +58,18 @@ public class CustomerController {
 	
 	
 	
-	@GetMapping("/delete")
-	public String delete(@RequestParam("id") int theId) {
+	@GetMapping("/CustomerDelete")
+	public String formDelete(@RequestParam("id") int theId) {
 		
-		what = true;						//Double truths can develope
-		whatid = theId;
 		
-		// delete the employee
+		
+		
 		customerService.deleteById(theId);
 		
-		// redirect to /employees/list
-		return "redirect:list";
 		
+		//return "redirect:list";
+		//return "Customer/CustomerForm";	
+		return "redirect:CustomerSignUp";
 	}
 	
 	
@@ -85,12 +85,12 @@ public class CustomerController {
 		
 		customerService.save(theCustomer);							//somewhere inside this file there is error in signing up
 		
-		whatid = theCustomer.getId();
+		storid = theCustomer.getId();
 		
-		if(what == true) {
-			theCustomer.setId(whatid);					//when updating the credential want to make sure the same id is still there
+		if(storbool == true) {
+			theCustomer.setId(storid);					//when updating the credential want to make sure the same id is still there
 											//I onder what would happen to the tickets. I would then also put the tickets and set away jsut liek this
-			what = false;
+			storbool = false;
 		}
 		
 	//	if(theId > 0){
@@ -102,7 +102,7 @@ public class CustomerController {
 		
 									//	return "Customer/list";   
 		return "redirect:newone";			//two option global variable
-									//return "redirect:list";				 //you should later have just findby id version of this. 
+							//return "redirect:list";				 //you should later have just findby id version of this. 
 	}												//should put it on the login page. 
 	
 	
@@ -114,8 +114,8 @@ public class CustomerController {
 	@GetMapping("/CustomerUpdate")
 	public String showFormForUpdate(@RequestParam("id") int theId, Model theModel) {
 		
-		what = true;
-		whatid = theId;
+		storbool = true;
+		storid = theId;
 		Customer theCustomer = customerService.findById(theId);    //from the db using JPA
 		
 		theModel.addAttribute("customer", theCustomer);
