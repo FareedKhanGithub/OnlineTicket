@@ -12,13 +12,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.brillio.service.CustomerService;
+import com.brillio.service.TicketService;
+
+
+
+
+
+
+
 @Entity
 @Table(name="ticket")
 public class Ticket {
 	//define fields
 	
 	
-	
+	//private CustomerService customerService;
+	//private Customer customerEnt;
 	
 	
 	@Id
@@ -28,8 +38,17 @@ public class Ticket {
 	
 
 
+
+
+
+
 	@Column(name="address")
 	private String address;
+	
+	@Column(name="name")
+	private String name;					//there is no foriegn key symbol here.
+	//define constructors
+	
 	
 	@Column(name="contact")
 	private String contact;
@@ -43,28 +62,45 @@ public class Ticket {
 	@Column(name="passenger")
 	private int passenger;
 	
-	@Column(name="name")
-	private String name;					//there is no foriegn key symbol here.
-	//define constructors
 	
+	/*			//Major
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+	   CascadeType.DETACH, CascadeType.REFRESH}) //apply the rest except cascade delete
+   @JoinColumn(name="ticket_id")   	 				//nullable = true   andrew sugest this but ehh      
+   private Customer customer;	
+	*/
+		
+		
+		
+		
+		
+	/*@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH}) //apply the rest except cascade delete
     @JoinColumn(name="ticket_id")
     private Customer customer;			//ticket_id is inside the table of customer
 	
+	*/
+	
+
 	
 	
 
 	public Ticket() {}
 
-	public Ticket(String name, String address, String contact, Date travelDate, Date returnDate, int passenger) {
-		this.name = name;
+
+	public Ticket(int id, String address, String name, String contact, Date travelDate, Date returnDate, int passenger) {
+			//Customer customer) {
+		super();
+		this.id = id;
 		this.address = address;
+		this.name = name;
 		this.contact = contact;
 		this.travelDate = travelDate;
 		this.returnDate = returnDate;
 		this.passenger = passenger;
+		//this.customer = customer;
 	}
+
 	//define getter/setter
 	
 
@@ -123,15 +159,16 @@ public class Ticket {
 		this.passenger = passenger;
 	}
 	
-	
+	/*
 	public Customer getCustomer() {					//One Customer       Many Tickets
 		return customer;
 	}
 
 	public void setCustomer(Customer customer) {
-		this.customer = customer;
+		//customerEnt
+		this.customer = customerEnt;  // customer;
 	}
-
+      */
 	
 
 
@@ -140,7 +177,7 @@ public class Ticket {
 	public String toString() {
 		return "Ticket [id=" + id + ", address=" + address + ", contact=" + contact + ", travelDate=" + travelDate
 				+ ", returnDate=" + returnDate + ", passenger=" + passenger + ", name=" + name + ", customer="
-				+ customer + "]";
+				 + "]";//+ customer + "]";
 	}
 	
 	

@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer findById(int theid) {															//???something strange here theid may not exist   but we use regular id in both pojo
 		Optional<Customer> result = customerRepository.findById(theid);
 		
-		Customer theCustomer = null;
+		Customer theCustomer = null;   //placeholder
 		
 		if (result.isPresent()) {
 			theCustomer = result.get();

@@ -31,7 +31,7 @@
 						 th:object="${customer}" method="POST">
 		
 			<!-- Add hidden form field to handle update -->
-		<!--  	<input type="hidden" th:field="*{id}" />       -->
+		      <input type="hidden" th:field="*{id}" />    
 			
 			
 			
@@ -41,14 +41,17 @@
 		
 			<input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">		
 
-			<!--  <input type="hidden" th:field="*{ticket_id}" />      lol just block it away   WHHYYYYY then lol -->
+		     <!--   <input type="hidden" th:field="*{tickets}"/>     -->
+		   
+		   
+		     <!--  just block away but then face future problems -->
 				
 			<button type="submit" class="btn btn-info col-2">Save the Customer</button>          <!-- saves the file  -->
 						
 		</form>
 	
 		<hr>
-		<a th:href="@{/Customer}">Back to the base page base login page not setup yet</a>
+		<a th:href="@{/Customer/list}">Back to the base page base login page not setup yet</a>
 		
 	</div>
 </body>
