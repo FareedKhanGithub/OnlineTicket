@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Save Employee</title>
+</head>
+
+
+
+
+<body>
+
+	<div class="container">
+	
+		<h3>Update Customer Details</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Update Customer details</p>
+									<!--    CustomerUpdate soley relying on the primary to change the details of the user going to the controller  -->
+		<form action="#" th:action="@{/Customer/save}"     
+						 th:object="${customer}" method="POST">
+		
+			<!-- Add hidden form field to handle update     but for add you dont need it seems so different page it is   this will say which id to bind to-->
+		<!--  <input type="hidden" th:field="*{id}" />  
+		
+		
+		
+		
+		
+		
+		
+		
+					/THIS FILE IS NO LONGER NEEDED ATLEAST SO FAR AS UPDATE AND POST ARE SAME REALLY
+		
+		
+		
+		
+		
+		
+		
+		 -->
+			
+			<input type="text" th:field="*{name}" class="form-control mb-4 col-4" placeholder= "Name">
+
+			<input type="text" th:field="*{contact}" class="form-control mb-4 col-4" placeholder="Contact">
+		
+			<input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">			
+				
+				<!-- foriegn keys you cannot update here this is merely customer details only -->
+		     
+			<!-- <input type="hidden" th:field="*{ticket_id}" />  -->
+				
+			<button type="submit" class="btn btn-info col-2">Update</button>    <!-- sends the form -->
+						
+		</form>
+	
+		<hr>
+		<a th:href="@{/Customer/list}">Back to Customer List</a>    <!-- change this to login page in the future -->
+		 <!-- <a th:href="@{redirect:list}">Back to the customersss list</a>   -->
+	</div>
+</body>
+
+</html>
