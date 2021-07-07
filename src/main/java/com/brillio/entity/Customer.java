@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,71 +60,30 @@ public class Customer {
 	@Column(name = "address")
 	private String address;
 	
+
+					//which id is this referring to.  
+	@JoinColumn( name = "id", referencedColumnName = "id")				
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Ticket> tickets;
+																	//how does this 
 	
-	/*@OneToMany(mappedBy="customer",
-	cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-     CascadeType.DETACH, CascadeType.REFRESH})
-	 private List<Ticket> tickets;			*/
-	
-	 
-	 /*
-	   									//MAJOR         realized that maybe Andrew db had changed quite a bit I should have my side setup as much as possible
-	  @OneToMany(mappedBy="customer",
-	 cascade = CascadeType.ALL)
-	 private List<Ticket> tickets = new ArrayList<>();		 */    //cant have a null spaced arraylist 
-	 
-	 
-	 //private List<Ticket> tickets;  
-	 
-	 
-											//jsut do all lol      //cant be null foriegn is a non null unique identifier
-	
-	 
-	 
-	 
-	 /*@OneToMany(mappedBy="ticket_id",
-     cascade = CascadeType.ALL)
-	 @JoinColumn( name = "ticket_id", referencedColumnName = "id")
-	 private List<Ticket> ticketd = new ArrayList<>();		 */	//the arraylist already exist mostly 
-	 
-	 
-	 // tickets = ;		//I havent allocated new space for this??
+	//-------------------------------------------------------------
 	
 	
-	 
-	 /*
-	 
-	 @OneToMany(mappedBy="customer",
-	 cascade = CascadeType.ALL)
-	 private List<Ticket> tickets = new ArrayList<>(ticketService.findAll());			//allocating new space and then filling it up using autowired
 	
-	  */
-	 
-	 
-	 
-	 
-	/* @OneToMany(mappedBy="ticket_id",
-			 cascade = CascadeType.ALL)
-	 @JoinColumn( name = "")
-	 private List<Ticket> tickets = new ArrayList<>();	   */
-			 
-			 //cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-				// CascadeType.DETACH, CascadeType.REFRESH})
-	           //private List<Ticket> tickets = new ArrayList<>();	
 	
-	 //https://www.youtube.com/watch?v=Buya2plwkj4
 	
 
 	public Customer() {}
 
 	
-	public Customer(int id, String name, String contact, String address) {   //,List<Ticket> tickets) {
+	public Customer(int id, String name, String contact, String address, List<Ticket> tickets) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.contact = contact;
 		this.address = address;
-		//this.tickets = tickets;
+		this.tickets = tickets;
 	}
 
 	public int getId() {
@@ -165,8 +125,23 @@ public class Customer {
 	}
 	
 	
+	
+	
+	
+	
+	
+	public List<Ticket> getTickets() {				//The regular tickets 
+		return tickets;
+	}
 
-	/*											Major
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
+	}
+
+	
+/*
+											Major
 	public List<Ticket> getTickets() {
 		return tickets;
 	}
@@ -176,9 +151,9 @@ public class Customer {
 		this.tickets = ticketService.findAll();
 		//this.tickets = tickets;
 	}
-		*/
+		
 
-
+*/
 	
 	
 	

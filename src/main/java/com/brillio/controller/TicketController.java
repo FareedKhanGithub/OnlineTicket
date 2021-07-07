@@ -27,7 +27,7 @@ public class TicketController {
 	}
 	
 	@GetMapping("/list") 
-	public String listTickets(Model theModel) {
+	public String listTickets(Model theModel) {									//This is not the input 
 		
 		List<Ticket> theTicket = ticketService.findAll();
 		theModel.addAttribute("tickets", theTicket);
@@ -35,13 +35,35 @@ public class TicketController {
 	}
 	
 	@GetMapping("/showFormForBuy")
-	public String showFormForBuy(Model theModel) {
+	public String showFormForBuy(Model theModel) {				
 		Ticket theTicket = new Ticket();
 		
 		theModel.addAttribute("ticket", theTicket);
 		
 		return "tickets/buy-form";
 	}
+	
+	
+		
+	@PostMapping("/buy")
+	public String saveTicket(@ModelAttribute("ticket") Ticket theTicket) {      //instilled into the model  we simply save it
+		//save the employee
+				//need data object I wonder if it will consider this. 
+		
+		
+										//date string is merely saved realy soley on the JPA repository with no regards 
+							//wy of converting the string input into a data object that can be stored properly. so taht the sql can register it properly. 
+		ticketService.save(theTicket);
+		
+		
+		//use a redirect to prevent duplicate submissions 
+		return "redirect:/tickets/list";
+	}
+	
+	
+	
+	
+	
 	
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("ticketId") int tikcetId, Model theModel) {
@@ -58,15 +80,7 @@ public class TicketController {
 		System.out.println("*********" + theTicket.getId());
 		return "tickets/buy-form";
 	}
-	
-	@PostMapping("/buy")
-	public String saveTicket(@ModelAttribute("ticket") Ticket theTicket) {
-		//save the employee
-		ticketService.save(theTicket);
-		//use a redirect to prevent duplicate submissions 
-		return "redirect:/tickets/list";
-	}
-	
+
 	@GetMapping("/delete") 
 	public String delete(@RequestParam("ticketId") int theId) {
 		ticketService.deleteById(theId);

@@ -1,16 +1,19 @@
 package com.brillio.entity;
 
-import java.sql.Date;
+import java.sql.Date;								//they should connect it would automatically convert it seems 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.brillio.service.CustomerService;
 import com.brillio.service.TicketService;
@@ -53,11 +56,20 @@ public class Ticket {
 	@Column(name="contact")
 	private String contact;
 	
-	@Column(name="travel_date")
-	private Date travelDate;
 	
-	@Column(name="return_date")
+														//As inputs they are saved as String but in the db they are saved as date 
+	//@Temporal(TemporalType.DATE)												//this unit is vulnerable to errors but this should work  month/day/year
+	@Column(name="travel_date")
+	private Date travelDate;						//employee.setDob(new Date(0, 0 , 1932));
+	
+	
+	//@Temporal(TemporalType.DATE)	 //Temporal makes it explicit you are dealing with dates not time hours	//if you want to track time then we would use TIMESTAMP
+	@Column(name="return_date")						
 	private Date returnDate;
+	
+	
+	
+	
 	
 	@Column(name="passenger")
 	private int passenger;
@@ -81,15 +93,25 @@ public class Ticket {
 	
 	*/
 	
-
+	
+	//------------------Koushiks reverse side-----------------------------------------------------------
+									//They need to know if they are comliementary to eachother 
+							//This will own the relationship    (what does that mean?
+	
+	//id is not insertable nor updatable this      is this in regards to customer id or ticket id?     I am thinking customer id because that is what Customer object ref is for
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id", insertable = false, updatable = false)    				//referencedColumnName = "id")						
+	private Customer customer;
+	
+					//only this side should have it hence the reason why I didnt need to do for login the last time. 
 	
 	
+	//----------------------------------------------------------------------------------------------------
 
 	public Ticket() {}
 
 
-	public Ticket(int id, String address, String name, String contact, Date travelDate, Date returnDate, int passenger) {
-			//Customer customer) {
+	public Ticket(int id, String address, String name, String contact, Date travelDate, Date returnDate, int passenger, Customer customer) {
 		super();
 		this.id = id;
 		this.address = address;
@@ -98,7 +120,7 @@ public class Ticket {
 		this.travelDate = travelDate;
 		this.returnDate = returnDate;
 		this.passenger = passenger;
-		//this.customer = customer;
+		this.customer = customer;
 	}
 
 	//define getter/setter
@@ -159,16 +181,16 @@ public class Ticket {
 		this.passenger = passenger;
 	}
 	
-	/*
+	
 	public Customer getCustomer() {					//One Customer       Many Tickets
 		return customer;
 	}
 
 	public void setCustomer(Customer customer) {
 		//customerEnt
-		this.customer = customerEnt;  // customer;
+		this.customer = customer;  // customer;
 	}
-      */
+      
 	
 
 

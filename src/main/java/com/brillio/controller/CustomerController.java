@@ -44,6 +44,11 @@ public class CustomerController {
 	
 	
 	
+	
+	
+	//We dont want a list of the customer as this will actually make things more complicated. owever we dont need to put it inside the bean though. 
+	
+	
 	@GetMapping("/newone")
 	public String showNewone(Model theModel){
 		
