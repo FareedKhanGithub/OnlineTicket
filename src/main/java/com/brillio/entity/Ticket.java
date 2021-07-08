@@ -75,30 +75,10 @@ public class Ticket {
 	private int passenger;
 	
 	
-	/*			//Major
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-	   CascadeType.DETACH, CascadeType.REFRESH}) //apply the rest except cascade delete
-   @JoinColumn(name="ticket_id")   	 				//nullable = true   andrew sugest this but ehh      
-   private Customer customer;	
-	*/
-		
-		
-		
-		
-		
-	/*@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH}) //apply the rest except cascade delete
-    @JoinColumn(name="ticket_id")
-    private Customer customer;			//ticket_id is inside the table of customer
 	
-	*/
-	
-	
-	//------------------Koushiks reverse side-----------------------------------------------------------
-									//They need to know if they are comliementary to eachother 
-							//This will own the relationship    (what does that mean?
-	
-	//id is not insertable nor updatable this      is this in regards to customer id or ticket id?     I am thinking customer id because that is what Customer object ref is for
+			
+				//id is from the local vairable here  they are joining based on Primary Key 
+	//if you put id insertble and updatble false in the other side  Customer it will lead to repeated mapping error   remember one side should be one other will be many  
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id", insertable = false, updatable = false)    				//referencedColumnName = "id")						
 	private Customer customer;

@@ -22,7 +22,6 @@ import com.brillio.service.TicketService;
 
 
 
-
 //@RestController
 
 @Controller
@@ -49,17 +48,47 @@ public class CustomerController {
 	//We dont want a list of the customer as this will actually make things more complicated. owever we dont need to put it inside the bean though. 
 	
 	
+	
+	
+	
+											//the old new one I realized that this is the only method needs the stor method 
 	@GetMapping("/newone")
 	public String showNewone(Model theModel){
 		
 		
-							//list only one when entirely new user
+							//list only one when entirely new user     one of the few times Where I need to grab the storid
 		Customer theCustomer = customerService.findById(storid);
-		theModel.addAttribute("customers", theCustomer);
+		theModel.addAttribute("customer", theCustomer);					//Where Customers coming from?  This customer maps to the html hence we can
+																//go down its list and put in the infromation we want
 		
 		return "Customer/list-customer";					//list-customer can show one or many 
 		}
-			
+	
+	
+	
+	
+											//you were trying to solve this but Post doesnt allow the passing of the id regardless though
+		 											//I would think customer entity would have the id in the first place considering it is auto generated 
+	
+	/*
+	@GetMapping("/newone")
+	public String showNewone(@RequestParam("id") int theId, Model theModel){
+		
+		
+							//list only one when entirely new user     one of the few times Where I need to grab the storid
+		Customer theCustomer = customerService.findById(theId);
+		theModel.addAttribute("customer", theCustomer);					//Where Customers coming from?  This customer maps to the html hence we can
+																//go down its list and put in the infromation we want
+		
+		return "Customer/list-customer";					//list-customer can show one or many 
+		}
+	*/
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -233,3 +262,4 @@ return "Customer/list-customer";			//list-customer can show one or many
 	
 	
 }
+	

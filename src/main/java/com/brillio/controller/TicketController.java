@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.brillio.entity.Customer;
 import com.brillio.entity.Ticket;
 import com.brillio.service.TicketService;
 
@@ -21,6 +22,10 @@ public class TicketController {
 	//private List<Ticket> tickets
 	private TicketService ticketService;
 	
+	
+	private Customer cust;
+	
+	
 	@Autowired
 	public TicketController(TicketService theTicketService) {
 		 ticketService = theTicketService;
@@ -29,11 +34,14 @@ public class TicketController {
 	@GetMapping("/list") 
 	public String listTickets(Model theModel) {									//This is not the input 
 		
-		List<Ticket> theTicket = ticketService.findAll();
+		List<Ticket> theTicket = ticketService.findAll();    //might be where the issue is
 		theModel.addAttribute("tickets", theTicket);
 		return "tickets/list-tickets";
 	}
 	
+	
+	
+												//potential for needing the customer id
 	@GetMapping("/showFormForBuy")
 	public String showFormForBuy(Model theModel) {				
 		Ticket theTicket = new Ticket();
@@ -53,10 +61,51 @@ public class TicketController {
 		
 										//date string is merely saved realy soley on the JPA repository with no regards 
 							//wy of converting the string input into a data object that can be stored properly. so taht the sql can register it properly. 
-		ticketService.save(theTicket);
+		
+			ticketService.save(theTicket);	
+		//////////////////////////////////////////////////////////
+		
+		
+		/*
+			storid = theCustomer.getId();
+			
+			if(storbool == true) {
+				theCustomer.setId(storid);					//when updating the credential want to make sure the same id is still there
+												//I onder what would happen to the tickets. I would then also put the tickets and set away jsut liek this
+				storbool = false;
+			}
+		*/
+		
+		
+		
+		
+		
+		
+		///////////////////////////////////////////////////////////////////////////////
+	
+		System.out.println("this is the id " + theTicket.getId());			//this i wonder
+		//System.out.println("this is the id of the customer " + cust.getId());	            //this just might be the error 
+		System.out.println("this is the address " + theTicket.getAddress());
+		System.out.println("this is the name " + theTicket.getName());
+		System.out.println("this is the Contact " + theTicket.getContact());
+		System.out.println("this is the address " + theTicket.getAddress());
+		
+		System.out.println("this is the travel date " + theTicket.getTravelDate());			//I wonder this is in there
+		System.out.println("this is the return date " + theTicket.getReturnDate());
+		
+		System.out.println("this is the passenger " + theTicket.getPassenger());
+		
+		theTicket.setCustomer(cust);	//get the private id 
+		
+		System.out.println("this is the passenger " + theTicket.getCustomer());       //I dont think I have ever actually got the key 
+		
+		///////////////////////////////////////////////////////////////////////////////
+		//cust.getId();
+		//theModel.addAttribute("customers", theCustomer);
 		
 		
 		//use a redirect to prevent duplicate submissions 
+		//return "redirect:/tickets/list";
 		return "redirect:/tickets/list";
 	}
 	

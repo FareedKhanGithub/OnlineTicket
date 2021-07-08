@@ -15,6 +15,8 @@ import com.brillio.entity.Customer;
 @Service
 public class CustomerServiceImpl implements CustomerService{					 
 	
+	//The service file is literally the same. 
+	
 	private CustomerRepository customerRepository;
 	
 	@Autowired

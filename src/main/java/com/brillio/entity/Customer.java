@@ -61,7 +61,7 @@ public class Customer {
 	private String address;
 	
 
-					//which id is this referring to.  
+					//which id is this referring to.  I think to the local variable here.  
 	@JoinColumn( name = "id", referencedColumnName = "id")				
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Ticket> tickets;

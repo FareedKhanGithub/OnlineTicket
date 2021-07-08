@@ -31,12 +31,19 @@
 					class="form-control mb-4 col-4" placeholder="Address">
 			<input type="text" th:field="*{contact}"
 					class="form-control mb-4 col-4" placeholder="Contact">
-			<input type="text" th:field="*{travelDate}"
+			<input type="date" th:field="*{travelDate}"
 					class="form-control mb-4 col-4" placeholder="Travel Date">
-			<input type="text" th:field="*{returnDate}"
+			<input type="date" th:field="*{returnDate}"
 					class="form-control mb-4 col-4" placeholder="Return Date">
+			
+			
+			
 			<input type="text" th:field="*{passenger}"
 					class="form-control mb-4 col-4" placeholder="Passenger">
+				
+				
+			 <!--   <input type="hidden" th:field="*{tickets}"/>            for now  -->	
+				
 				
 			<button type="submit" class="btn btn-info col-2">Buy</button>
 		</form>

@@ -22,7 +22,17 @@
 <body>
 
 
+												<!--should also pass in the parameterized id number as that is where the id number would latch on to -->
+
+
+
+
+
 <div class="container">
+
+
+
+
 	<h3>Customer Directory</h3>
 	<hr>
 	
@@ -37,7 +47,7 @@
 		</thead>
 		
 		<tbody>
-			<tr th:each="tempCustomers : ${customers}">				<!-- from the entity -->
+			<tr th:each="tempCustomers : ${customer}">				<!-- from the entity -->
 				<td th:text="${tempCustomers.name}" />
 				<td th:text="${tempCustomers.contact}" />
 				<td th:text="${tempCustomers.address}" />
@@ -63,6 +73,15 @@
 						Delete
 					</a>
 					 
+					
+					
+					<a th:href="@{/tickets/showFormForBuy}"
+							class="btn btn-info btn-sm">
+							Add Ticket
+					</a>
+					
+					
+					
 					
 				</td>
 			</tr>		
