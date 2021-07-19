@@ -61,6 +61,71 @@ public class Customer {
 	private String address;
 	
 
+	
+	
+	
+	
+	
+	
+	//-------------------------------------------------------------
+	
+	
+		//we share the entity					//Need to make changes in the controller and thymeleaf as well. and sql database 
+		
+		
+		
+		
+		@Column(name = "emailr")
+		private String emailr;								//in the future it will be email  I am just putting this for being in line with tuts
+		
+
+
+
+	
+
+		@Column(name = "password")
+		private String password;
+		
+		
+		
+		
+
+
+		@Column(name = "active")
+		private boolean active;			//user needs to be active so spring security can now  compare weather this person is in the system or not. 
+		
+		
+		@Column(name = "roles")
+		private String roles;				//I am not entire ly sure why have this but it allows the future proofing which is nice. 
+														//there isnt going to be a admin role so will be wide open as everyone is a customer who is using this.
+											//Koushik is going ot be using this for csv but the general case will happen soon. 
+		
+		//-------------------------------------------------------------
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 					//which id is this referring to.  I think to the local variable here.  
 	@JoinColumn( name = "id", referencedColumnName = "id")				
 	@OneToMany(fetch = FetchType.EAGER)
@@ -77,14 +142,24 @@ public class Customer {
 	public Customer() {}
 
 	
-	public Customer(int id, String name, String contact, String address, List<Ticket> tickets) {
+
+
+	public Customer(int id, String name, String contact, String address, String emailr, String password, boolean active,
+			String roles, List<Ticket> tickets) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.contact = contact;
 		this.address = address;
+		this.emailr = emailr;
+		this.password = password;
+		this.active = active;
+		this.roles = roles;
 		this.tickets = tickets;
 	}
+
+
+
 
 	public int getId() {
 		return id;
@@ -125,10 +200,62 @@ public class Customer {
 	}
 	
 	
+	//-------------------------------------
 	
-	
-	
-	
+	public String getEmailr() {
+		return emailr;
+	}
+
+
+
+
+	public void setEmailr(String emailr) {
+		this.emailr = emailr;
+	}
+
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+
+
+
+	public String getRoles() {
+		return roles;
+	}
+
+
+
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	//------------------------------------------------------
 	
 	public List<Ticket> getTickets() {				//The regular tickets 
 		return tickets;

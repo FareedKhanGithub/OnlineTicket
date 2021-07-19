@@ -135,8 +135,11 @@ public class CustomerController {
 		//what = true;
 		
 									//	return "Customer/list";   
-		return "redirect:newone";			//two option global variable
-							//return "redirect:list";				 //you should later have just findby id version of this. 
+		//return "redirect:newone";			//two option global variable
+		
+		//return "redirect:login";
+		return "/login";			//redundant customer
+		//return "redirect:list";				 //you should later have just findby id version of this. 
 	}												//should put it on the login page. 
 	
 	
@@ -177,6 +180,84 @@ public class CustomerController {
 		return "Customer/CustomerForm";          //save was put here
 	}
 
+	
+	
+	
+	
+	
+	
+	@GetMapping("/AuthTheCust")									//required = true removed to make it easer 
+	public String logincompare(@RequestParam(value = "emailr") String theemailr,@RequestParam( value = "password") String thepassword) {
+		
+		List<Customer> theCustomer = customerService.findAll();				//Arraylist
+		
+		System.out.println("do we atleast get this far");
+		int counter = 0;
+		for(Customer onecust: theCustomer) {
+			counter += 1;
+			
+			if(onecust.getEmailr().equals(theemailr)){
+			
+				if(onecust.getPassword().equals(thepassword)){					//this is reference not value equals would be used
+					//activate session over here perhaps it could help with security
+					
+					
+					
+					storid = onecust.getId();			
+					//storbool = true;					//allows the update ability to connect to the original id in the save method so you are able to update with original customer
+						
+					return "redirect:newone";
+					//return "logincust";
+					//return "Customer/list-customer";
+				}
+				
+				//else {
+					//System.out.println("the login was not successful because username username is wrong, please try again");
+					//return "/login";
+				//}
+				
+			}
+			
+			
+			//else {
+				//System.out.println("the login was not successful because of password is wrong, please try again");
+				//return "/login";
+			//}
+			System.out.println(onecust.getPassword());
+			System.out.println(onecust.getEmailr());
+		}
+		
+		
+		
+	
+	
+		System.out.println("no entry was put in " + "this is how many times it goes through the for loop to find credentials " +  counter);
+		return "/login";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

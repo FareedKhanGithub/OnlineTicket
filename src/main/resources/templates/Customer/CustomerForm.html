@@ -41,7 +41,19 @@
 		
 			<input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">		
 
+		    <input type="text" th:field="*{emailr}" class="form-control mb-4 col-4" placeholder="Emailr">		
+			<input type="text" th:field="*{password}" class="form-control mb-4 col-4" placeholder="Password">		
+			<input type="hidden" th:field="*{active}" class="form-control mb-4 col-4" placeholder="Active">				<!-- default is false -->
+			<input type="hidden" th:field="*{roles}" class="form-control mb-4 col-4" placeholder="Roles">		<!-- default is customer no roles needed -->
+			
+			
+		   
+		   
 		     <!--   <input type="hidden" th:field="*{tickets}"/>            for now  -->
+		   
+		   
+		   
+		   
 		   
 		   
 		     <!--  just block away but then face future problems -->
@@ -59,7 +71,7 @@
 	
 	
 		<hr>
-		<a th:href="@{/Customer/CustomerSignUp}">Back to the base page base login page not setup yet</a>
+		<a th:href="@{/login}">Back to the login page</a>
 		
 	</div>
 </body>
