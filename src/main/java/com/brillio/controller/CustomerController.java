@@ -138,7 +138,12 @@ public class CustomerController {
 		//return "redirect:newone";			//two option global variable
 		
 		//return "redirect:login";
-		return "/login";			//redundant customer
+		//return "login";
+		//return "/loginblank";			//redundant customer    //I wonder fi I could just finesse by calling a bogus login.
+		
+		
+		return "redirect:/login";
+		
 		//return "redirect:list";				 //you should later have just findby id version of this. 
 	}												//should put it on the login page. 
 	

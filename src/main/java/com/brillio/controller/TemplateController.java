@@ -12,4 +12,17 @@ public class TemplateController {
 	public String getLoginView() {
 		return "/login";
 	}
+	
+	
+	
+	@GetMapping("/loginblank")
+	public String getLoginblankView() {
+		
+		
+		System.out.println("do we atleast get here");
+										
+		//return "redirect:login";
+		return "/login";
+	}
+	
 }
